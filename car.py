@@ -3,10 +3,10 @@ from time import sleep
 
 '''
             In1 | In2 | In3 | In4
-Forward:     1     0     0     1
-Backward:    0     1     1     0
-Right:       1     0     1     0
-Left:        0     1     0     1
+Right:       1     0     0     1
+Left:        0     1     1     0
+Backward:    1     0     1     0
+Forward:     0     1     0     1
 Stop:        0     0     0     0
 ---------------------------------
 Speed:      Low | Med | High
@@ -25,6 +25,7 @@ class Car:
         self.gear = 0
     
         GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
         GPIO.setup(self.in1,GPIO.OUT)
         GPIO.setup(self.in2,GPIO.OUT)
         GPIO.setup(enA,GPIO.OUT)
@@ -39,25 +40,25 @@ class Car:
         self.pwmB = GPIO.PWM(enB, 1000)
         self.pwmB.start(25)
             
-    def forward(self):
+    def right(self):
         GPIO.output(self.in1,GPIO.HIGH)
         GPIO.output(self.in2,GPIO.LOW)
         GPIO.output(self.in3,GPIO.LOW)
         GPIO.output(self.in4,GPIO.HIGH)
 
-    def backward(self):
+    def left(self):
         GPIO.output(self.in1,GPIO.LOW)
         GPIO.output(self.in2,GPIO.HIGH)
         GPIO.output(self.in3,GPIO.HIGH)
         GPIO.output(self.in4,GPIO.LOW)
 
-    def right(self):
+    def backward(self):
         GPIO.output(self.in1,GPIO.HIGH)
         GPIO.output(self.in2,GPIO.LOW)
         GPIO.output(self.in3,GPIO.HIGH)
         GPIO.output(self.in4,GPIO.LOW)
 
-    def left(self):
+    def forward(self):
         GPIO.output(self.in1,GPIO.LOW)
         GPIO.output(self.in2,GPIO.HIGH)
         GPIO.output(self.in3,GPIO.LOW)
